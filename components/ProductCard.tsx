@@ -1,0 +1,36 @@
+import Image from "next/image";
+
+interface Props {
+  name: string;
+  description: string;
+  image?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+export function ProductCard({ name, description, image, ctaLabel = "Enquire", ctaHref = "/contact" }: Props) {
+  return (
+    <article className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col">
+      <div className="relative aspect-[4/3] bg-gradient-to-br from-[#f0fdf9] to-[#e8eaf6]">
+        {image ? (
+          <Image src={image} alt={name} fill className="object-cover" />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-[#524096] opacity-30 text-6xl" aria-hidden="true">✦</span>
+          </div>
+        )}
+      </div>
+      <div className="p-5 flex flex-col gap-3 flex-1">
+        <h3 className="font-semibold text-[#2d2d2d] text-base">{name}</h3>
+        <p className="text-[#5a5a5a] text-sm leading-relaxed flex-1">{description}</p>
+        <a
+          href={ctaHref}
+          className="inline-flex items-center justify-center px-6 py-2 rounded-full gradient-bg text-white text-sm font-semibold
+            hover:brightness-110 transition-all duration-200 min-h-[44px]"
+        >
+          {ctaLabel}
+        </a>
+      </div>
+    </article>
+  );
+}
